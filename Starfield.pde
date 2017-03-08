@@ -4,14 +4,17 @@ void setup()
   size(500, 500); 
   part = new Particle[800]; 
   for(int i = 0; i < part.length; i++)
-  { 
-    if(i % 2 == 0)
-      part[i] = new OddballParticle(); 
-    else if(i % 5 == 0)
-       part[i] = new JumboParticle();
-     else
-       part[i] = new NormalParticle(); 
-     
+  {
+    part[i] = new NormalParticle();   
+  }
+  for(int i = 0; i < 400; i++)
+  {
+    part[i] = new OddballParticle();   
+  }
+  for(int i = 0; i < part.length; i++)
+  {
+    i++; 
+    part[i] = new JumboParticle();   
   }
 }
 
