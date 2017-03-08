@@ -1,26 +1,97 @@
-//your code here
+Particle [] part; 
 void setup()
 {
-	//your code here
+  size(500, 500); 
+  part = new Particle[800]; 
+  for(int i = 0; i < part.length; i++)
+  { 
+    if(i % 2 == 0)
+      part[i] = new OddballParticle(); 
+    else if(i % 5 == 0)
+       part[i] = new JumboParticle();
+     else
+       part[i] = new NormalParticle(); 
+     
+  }
 }
+
 void draw()
 {
-	//your code here
+   background(0); 
+   for(int i = 0; i < part.length; i++)
+   {
+     part[i].show(); 
+     part[i].move(); 
+   }
+    
+   
 }
-class NormalParticle
+class NormalParticle implements Particle 
 {
-	//your code here
+  double x, y, angle, speed; 
+  int color1, color2, color3;  
+  NormalParticle(){
+    x = 250; 
+    y = 250; 
+    angle = (Math.random()*(2*Math.PI)); 
+    speed = (Math.random()*10)+1; 
+    color1 = (int)(Math.random()*255)+1;
+    color2 = (int)(Math.random()*255)+1;
+    color3 = (int)(Math.random()*255)+1;
+  }
+  public void move(){
+    x = Math.cos(angle)*speed+x; 
+    y = Math.sin(angle)*speed+y;
+    if(x >= 500 || y >= 500){
+       x = 250; 
+       y = 250;  
+       angle = (Math.random()*(2*Math.PI)); 
+       speed = (Math.random()*10)+5; 
+    }
+  }
+  public void show(){
+    ellipse((int)x, (int)y, 15, 15); 
+    fill(color2, color3, color1); 
+  }
 }
 interface Particle
 {
-	//your code here
+   public void show(); 
+   public void move(); 
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle
 {
-	//your code here
+  double x, y, angle, speed; 
+  int color1, color2, color3;  
+  OddballParticle(){
+    x = 250; 
+    y = 250; 
+    angle = (Math.random()*(2*Math.PI)); 
+    speed = (Math.random()*10); 
+    color1 = (int)(Math.random()*255)+1;
+    color2 = (int)(Math.random()*255)+1;
+    color3 = (int)(Math.random()*255)+1;
+  }
+  public void move(){
+    x = Math.cos(angle)*speed+x; 
+    y = Math.sin(angle)*speed+y; 
+    if(x >= 500 || y >= 500){
+       x = 250; 
+       y = 250; 
+      angle = (Math.random()*(2*Math.PI)); 
+      speed = (Math.random()*10);  
+    }
+  }
+  public void show(){
+    rect((int)x, (int)y, 25, 25); 
+    fill(color1, color2, color3);
+    
+  }
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle
 {
-	//your code here
+  public void show(){
+   ellipse((int)x, (int)y, 35, 35);  
+   fill(color3, color1, color2); 
+  }
 }
-
