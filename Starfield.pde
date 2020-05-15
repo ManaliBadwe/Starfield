@@ -83,7 +83,7 @@ class OddballParticle implements Particle
        y = 250; 
       angle = (Math.random()*(2*Math.PI)); 
       speed = (Math.random()*10);  
-    }
+    } 
   }
   public void show(){
     rect((int)x, (int)y, 25, 25); 
